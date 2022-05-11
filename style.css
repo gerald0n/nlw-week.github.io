@@ -9,6 +9,8 @@ O próximo elemento será jogado para BAIXO, havendo uma quebra de linha.
 (h's, p's - block por padrão)
 
 display: inline -- o elemento (caixa) ocupará apenas seu próprio tamanho e será posicionado em linha.
+
+box-sizing: border-box; -- faz com que o tamanho da caixa seja contado a partir da borda / sem o border-box, o tamanho será definido a partir do conteúdo, fazendo com que a caixa, no total, seja maior Ex.: se o tamanho da caixa for 50px, borda 1px e padding 10 px, com o border box, o elemento será 50px no total, fazendo com que o conteúdo tenha seu tamanho reduzido. Sem border-box, na mesma configuração, a caixa terá um tamanho maior que 50px, contando com 1px de borda e 10px de padding, seu tamanho será de 61px. 
 **/
 
 :root {
@@ -16,14 +18,19 @@ display: inline -- o elemento (caixa) ocupará apenas seu próprio tamanho e ser
     --primary-color: hsl(170, 100%, 26%);
     --headline: hsl(210, 11%, 15%);
     --paragraph: hsl(210, 9%, 31%);
+    box-sizing: border-box;
 }
 
 body {
     font-family: 'DM Sans';
     font-size: 1.6rem;
-
-    text-align: center;
 }
+
+/**header {
+    width: 37.5rem;
+    margin auto faz com que a página preencha de margem os espaços sobrando automaticamente; nesse caso, fazendo com que o conteúdo fique centralizado
+}
+**/
 
 h4 {
     font-size: 1.4rem;
