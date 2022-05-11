@@ -26,11 +26,12 @@ body {
     font-size: 1.6rem;
 }
 
-/**header {
+div {
     width: 37.5rem;
-    margin auto faz com que a página preencha de margem os espaços sobrando automaticamente; nesse caso, fazendo com que o conteúdo fique centralizado
+    margin-left: auto;
+    margin-right: auto;
+    /**margin auto faz com que a página preencha de margem os espaços sobrando automaticamente; nesse caso, fazendo com que o conteúdo fique centralizado**/
 }
-**/
 
 h4 {
     font-size: 1.4rem;
