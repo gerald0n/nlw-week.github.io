@@ -91,7 +91,7 @@ button {
     display: flex; /* o display flex altera o comportamento dos contents-childs / dentro da caixa / deixando um content ao lado do outro*/
     align-items: center; /* permite alinhar os contents dentro da box no EIXO CRUZADO*/
     justify-content: center; /* permite alinhar os contents dentro da box na eixo */
-    gap: 1.6rem; /* alinhamento entre os elementos filhos*/
+    gap: 1.6rem; /* coloca espaço entre os elementos filhos*/
 
     margin-left: auto;
     margin-right: auto;
@@ -110,7 +110,7 @@ button {
    display: flex; /* coloca os childs um ao lado do outro */
    flex-direction: column; /* muda os itens de eixo. Row - eixo X; Column - eixo Y */
    justify-content: center; /* alinha os itens no eixo PRINCIPAL / o valor center alinha os itens do centro do eixo */
-   gap: 6rem;
+   gap: 6rem; /* aplica espaçamento entre os content-childs */
 }
 
 
