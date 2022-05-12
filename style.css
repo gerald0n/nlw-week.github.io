@@ -48,6 +48,14 @@ h4 {
     margin-bottom: 1.6rem;
 }
 
+h3 {
+    font-size: 4.8rem;
+}
+
+/* .container {
+    background-color: white;
+} */
+
 h1 {
     font-size: 3.4rem;
     color: var(--headline);
