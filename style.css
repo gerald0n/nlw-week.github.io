@@ -21,6 +21,7 @@ display: inline -- o elemento (caixa) ocupará apenas seu próprio tamanho e ser
     --primary-color: hsl(170, 100%, 26%);
     --headline: hsl(210, 11%, 15%);
     --paragraph: hsl(210, 9%, 31%);
+    --brand-beige: hsl(39, 100%, 97%);
 
     /*     box-sizing: border-box; -- faz com que o tamanho da caixa seja contado a partir da borda / sem o border-box, o tamanho será definido a partir do conteúdo, fazendo com que a caixa, no total, seja maior Ex.: se o tamanho da caixa for 50px, borda 1px e padding 10 px, com o border box, o elemento será 50px no total, fazendo com que o conteúdo tenha seu tamanho reduzido. Sem border-box, na mesma configuração, a caixa terá um tamanho maior que 50px, contando com 1px de borda e 10px de padding, seu tamanho será de 61px.  */
 }
@@ -33,9 +34,7 @@ body {
 
 header {
     width: 37.5rem;
-    margin-left: auto;
-    margin-right: auto;
-
+    margin-inline: auto;
     margin-top: 4.1rem;
 
     /**margin auto faz com que a página preencha de margem os espaços sobrando automaticamente; nesse caso, fazendo com que o conteúdo fique centralizado**/
@@ -89,11 +88,45 @@ button {
     font-weight: 700;
     text-transform: uppercase;
 
-    display: flex; /* o display flex altera o comportamento dos contents-childs */
-    align-items: center; /* permite alinhar os contents dentro da box na vertical*/
-    justify-content: center; /* permite alinhar os contents dentro da box na horizontal */
+    display: flex; /* o display flex altera o comportamento dos contents-childs / dentro da caixa / deixando um content ao lado do outro*/
+    align-items: center; /* permite alinhar os contents dentro da box no EIXO CRUZADO*/
+    justify-content: center; /* permite alinhar os contents dentro da box na eixo */
     gap: 1.6rem; /* alinhamento entre os elementos filhos*/
 
     margin-left: auto;
     margin-right: auto;
 }
+
+/* 02 */
+
+.stats {
+    width: 32.7rem;
+    height: 47rem;
+
+    margin-inline: auto;
+
+    background-color: var(--brand-beige);
+
+   display: flex; /* coloca os childs um ao lado do outro */
+   flex-direction: column; /* muda os itens de eixo. Row - eixo X; Column - eixo Y */
+   justify-content: center; /* alinha os itens no eixo PRINCIPAL / o valor center alinha os itens do centro do eixo */
+   gap: 6rem;
+}
+
+
+.stat p {
+    margin: 0;
+}
+
+
+
+/* .teste {
+    height: 50rem;
+    width: 50rem;
+    background-color: red;
+    margin-inline: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+} */
