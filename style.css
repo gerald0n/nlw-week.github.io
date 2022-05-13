@@ -11,6 +11,9 @@ O próximo elemento será jogado para BAIXO, havendo uma quebra de linha.
 display: inline -- o elemento (caixa) ocupará apenas seu próprio tamanho e será posicionado em linha.
 
 **/
+
+/* ========== GERAL ========== */
+
 * {
     margin: 0;
     box-sizing: border-box;
@@ -22,6 +25,8 @@ display: inline -- o elemento (caixa) ocupará apenas seu próprio tamanho e ser
     --headline: hsl(210, 11%, 15%);
     --paragraph: hsl(210, 9%, 31%);
     --brand-beige: hsl(39, 100%, 97%);
+    --brand-light: hsl(148, 23%, 89%);
+    --nav-height: 7.2rem;
 
     /*     box-sizing: border-box; -- faz com que o tamanho da caixa seja contado a partir da borda / sem o border-box, o tamanho será definido a partir do conteúdo, fazendo com que a caixa, no total, seja maior Ex.: se o tamanho da caixa for 50px, borda 1px e padding 10 px, com o border box, o elemento será 50px no total, fazendo com que o conteúdo tenha seu tamanho reduzido. Sem border-box, na mesma configuração, a caixa terá um tamanho maior que 50px, contando com 1px de borda e 10px de padding, seu tamanho será de 61px.  */
 }
@@ -32,22 +37,53 @@ body {
     font-size: 1.6rem;
 }
 
-header {
+.wrapper {
+    /* class para definir largura de layout junto com suas margens horizontais, centralizando todo o conteúdo */
     width: 37.5rem;
-    margin-inline: auto;
-    margin-top: 4.1rem;
-
-    /**margin auto faz com que a página preencha de margem os espaços sobrando automaticamente; nesse caso, fazendo com que o conteúdo fique centralizado**/
+    margin-inline: auto; /**margin auto faz com que a página preencha de margem os espaços sobrando automaticamente; nesse caso, fazendo com que o conteúdo fique centralizado //// margin-inline == margin left e right; margin-block == margin bottom e top**/
+    padding-inline: 2.4rem;
 }
 
-h4 {
+/* ========== FIM-GERAL ========== */
+
+/* ========== HEADER ========== */
+
+header {
+    margin-top: calc(
+        4.1rem + var(--nav-height)
+    ); /* utilizado calc() para somar a margin do header com a altura do nav, fazendo com que o nav não fique sobreposto ao header. 
+    
+    O intuito da soma é: 
+    
+    o nav tem um tamanho de 7.2rem, porém, por sua position ser fixed, independente do tamanho, irá sobrer todos os outros elementos da página. Assim, somar o margin-top do header ao tamanho do nav faz com que o espaçamento seja dado.
+    */
+}
+
+/* ESSE BEFORE ESTÁ ANTES DE TUDO PORQUE, NA PRÁTICA, ELE VEM ANTES DE TUDO MESMO, SENDO FILHO (CHILD) DO HEADER */
+header::before {
+    /* criar elemento no html */
+    /* before - antes; header::before == antes do header, tem isso... */
+
+    content: ''; /* toda 'tag element' tem que ter um content, um conteúdo */
+    width: 100vw; /* largura da box - vw é viewport, o que significa que a largura acompanhará o tamanho da viewport */
+    height: calc(108rem + var(--nav-height));
+    background-color: var(--brand-light);
+    display: block; /* display porque todo elemento tem que ter um display pré definido. As tags no html tem display pré-definidos pelo navegador, mas, como estamos criando um elemento html pelo CSS, as pré-definições devem ser feitas manualmente */
+
+    position: absolute; /* sem a position absolute, o elemento  */
+    top: 0; /* a posição inicial de cima pra baixo */
+    left: 0; /* a posição inicial da esquerda pra direita */
+    z-index: -1; /* EIXO Z (profundidade). Todos os elementos são pré-definidos no eixo Z valor 0, onde todos estão no mesmo plano de fundo. Valor negativo '-1' faz com que o elemento fique no plano de trás, e, valor positivo, faz com que o elemento fique à frente. */
+}
+
+header h4 {
     font-size: 1.4rem;
     color: var(--primary-color);
 
     margin-bottom: 1.6rem;
 }
 
-h3 {
+header h3 {
     font-size: 4.8rem;
 }
 
@@ -55,7 +91,7 @@ h3 {
     background-color: white;
 } */
 
-h1 {
+header h1 {
     font-size: 3.4rem;
     color: var(--headline);
     line-height: 130%;
@@ -63,7 +99,7 @@ h1 {
     margin-bottom: 2.4rem;
 }
 
-p {
+header p {
     font-size: 1.8rem;
     line-height: 150%;
     font-weight: 400;
@@ -72,7 +108,7 @@ p {
     margin-bottom: 3.2rem;
 }
 
-button {
+header button {
     background: var(--primary-color);
 
     border: none;
@@ -91,7 +127,8 @@ button {
     display: flex; /* o display flex altera o comportamento dos contents-childs / dentro da caixa / deixando um content ao lado do outro*/
     align-items: center; /* permite alinhar os contents dentro da box no EIXO CRUZADO*/
     justify-content: center; /* permite alinhar os contents dentro da box na eixo */
-    gap: 1.6rem; /* coloca espaço entre os elementos filhos*/
+    gap: 1.6rem;
+    /* coloca espaço entre os elementos filhos*/
 
     margin-left: auto;
     margin-right: auto;
@@ -99,34 +136,77 @@ button {
 
 /* 02 */
 
+header img {
+    width: 26.4rem; /* colocar o tamanho relativo para acompanhar a dimunuição ou aumento da página */
+    display: block;
+    margin-inline: auto;
+    object-position: 0 0.4rem;
+    /* mexe na posição do objeto. object-position: X Y; */
+}
+
 .stats {
     width: 32.7rem;
-    height: 47rem;
 
+    padding-block: 4rem;
     margin-inline: auto;
 
     background-color: var(--brand-beige);
+    border: 1px solid var(--brand-light);
+    border-radius: 0.6rem;
 
-   display: flex; /* coloca os childs um ao lado do outro */
-   flex-direction: column; /* muda os itens de eixo. Row - eixo X; Column - eixo Y */
-   justify-content: center; /* alinha os itens no eixo PRINCIPAL / o valor center alinha os itens do centro do eixo */
-   gap: 6rem; /* aplica espaçamento entre os content-childs */
+    display: flex; /* coloca os childs um ao lado do outro */
+    flex-direction: column; /* muda os itens de eixo. Row - eixo X; Column - eixo Y */
+    justify-content: center; /* alinha os itens no eixo PRINCIPAL / o valor center alinha os itens do centro do eixo */
+    gap: 6rem; /* aplica espaçamento entre os content-childs */
 }
-
 
 .stat p {
     margin: 0;
+    color: var(--primary-color);
+    line-height: 150%;
+    /* font-size: 1.6rem; comentado porque o body já tem o font-size padrão de 1.6rem (16px)*/
 }
 
+.stat h3 {
+    font-size: 4.8rem;
+    color: var(--headline);
+    line-height: 130%;
+    margin-bottom: 0.4rem;
+}
 
+/* ========== FIM-HEADER ========== */
 
-/* .teste {
-    height: 50rem;
-    width: 50rem;
-    background-color: red;
-    margin-inline: auto;
+/* ========== NAVIGATION ========== */
+
+nav {
     display: flex;
-    flex-direction: row;
-    justify-content: center;
+    height: var(--nav-height);
+
+    position: fixed; /* fixa o elemento, sobrepondo sob todo o resto ///// RESETA TODAS AS CONFIGURAÇÕES */
+    top: 0; /* faz com que o elemento comece na posição inicial de cima para baixo */
+    left: 50%; /* faz com que o elemento comece no centro da tela da esquerda para direta */
+    transform: translatex(-50%);
+}
+
+nav .wrapper {
+    display: flex;
     align-items: center;
-} */
+    justify-content: space-between; /* preenche automaticamente os espaços, distanciando ao máximo seus elementos. Usado para posicionar elementos nas extremidades do eixo X */
+}
+
+/* estilo do nav quando a function do JS for executada e a class scroll for add no html */
+
+nav.scroll {
+    background-color: var(--primary-color);
+    width: 100vw;
+}
+
+nav.scroll svg:nth-child(1) path {
+    /* pega o primeiro FILHO (svg) que encontrar */
+    fill: white;
+}
+
+nav.scroll svg:nth-child(2) path {
+    /* pega o segundo FIHLO (svg) que encontrar */
+    stroke: white;
+}
