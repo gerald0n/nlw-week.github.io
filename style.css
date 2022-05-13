@@ -65,7 +65,7 @@ header::before {
     /* before - antes; header::before == antes do header, tem isso... */
 
     content: ''; /* toda 'tag element' tem que ter um content, um conteúdo */
-    width: 100vw; /* largura da box - vw é viewport, o que significa que a largura acompanhará o tamanho da viewport */
+    width: 100%; /* largura da box - vw é viewport, o que significa que a largura acompanhará o tamanho da viewport */
     height: calc(108rem + var(--nav-height));
     background-color: var(--brand-light);
     display: block; /* display porque todo elemento tem que ter um display pré definido. As tags no html tem display pré-definidos pelo navegador, mas, como estamos criando um elemento html pelo CSS, as pré-definições devem ser feitas manualmente */
@@ -194,7 +194,7 @@ nav .wrapper {
     justify-content: space-between; /* preenche automaticamente os espaços, distanciando ao máximo seus elementos. Usado para posicionar elementos nas extremidades do eixo X */
 }
 
-/* estilo do nav quando a function do JS for executada e a class scroll for add no html */
+/* ============= estilo do nav quando a function do JS for executada e a class scroll for add no html ================*/
 
 nav.scroll {
     background-color: var(--primary-color);
