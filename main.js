@@ -7,3 +7,11 @@ function onScroll() {
 
 essa função está sendo instanciada no html, na tag body
 */
+
+function openMenu() {
+    document.body.classList.add('menu-expanded')
+}
+
+function closeMenu() {
+    document.body.classList.remove('menu-expanded')
+}

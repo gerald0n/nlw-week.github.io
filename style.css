@@ -4,11 +4,10 @@
 
 definições DISPLAY
 
-display: block -- a o elemento (caixa) ocupará toda a largura da página e não importa se há elementos antes ou depois. 
+display: block -- o elemento (box) ocupará toda a largura da página e não importa se há elementos antes ou depois. 
 O próximo elemento será jogado para BAIXO, havendo uma quebra de linha.
-(h's, p's - block por padrão)
 
-display: inline -- o elemento (caixa) ocupará apenas seu próprio tamanho e será posicionado em linha.
+display: inline -- o elemento (box) ocupará apenas seu próprio tamanho e será posicionado em linha.
 
 **/
 
@@ -16,7 +15,10 @@ display: inline -- o elemento (caixa) ocupará apenas seu próprio tamanho e ser
 
 * {
     margin: 0;
+    padding: 0;
     box-sizing: border-box;
+
+    /*     box-sizing: border-box; -- faz com que o tamanho da caixa seja contado a partir da borda / sem o border-box, o tamanho será definido a partir do conteúdo, fazendo com que a caixa, no total, seja maior Ex.: se o tamanho da caixa for 50px, borda 1px e padding 10 px, com o border box, o elemento será 50px no total, fazendo com que o conteúdo tenha seu tamanho reduzido. Sem border-box, na mesma configuração, a caixa terá um tamanho maior que 50px, contando com 1px de borda e 10px de padding, seu tamanho será de 61px.  */
 }
 
 :root {
@@ -27,14 +29,22 @@ display: inline -- o elemento (caixa) ocupará apenas seu próprio tamanho e ser
     --brand-beige: hsl(39, 100%, 97%);
     --brand-light: hsl(148, 23%, 89%);
     --nav-height: 7.2rem;
-
-    /*     box-sizing: border-box; -- faz com que o tamanho da caixa seja contado a partir da borda / sem o border-box, o tamanho será definido a partir do conteúdo, fazendo com que a caixa, no total, seja maior Ex.: se o tamanho da caixa for 50px, borda 1px e padding 10 px, com o border box, o elemento será 50px no total, fazendo com que o conteúdo tenha seu tamanho reduzido. Sem border-box, na mesma configuração, a caixa terá um tamanho maior que 50px, contando com 1px de borda e 10px de padding, seu tamanho será de 61px.  */
 }
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    /* ambos vão pegar 100% do tamanho da página, independente da resolução */
+}
+
+
 
 body {
     font-family: 'DM Sans';
     text-align: center;
     font-size: 1.6rem;
+    overflow: overlay;
 }
 
 .wrapper {
@@ -42,6 +52,10 @@ body {
     width: 37.5rem;
     margin-inline: auto; /**margin auto faz com que a página preencha de margem os espaços sobrando automaticamente; nesse caso, fazendo com que o conteúdo fique centralizado //// margin-inline == margin left e right; margin-block == margin bottom e top**/
     padding-inline: 2.4rem;
+}
+
+ul {
+    list-style: none;
 }
 
 /* ========== FIM-GERAL ========== */
@@ -192,6 +206,7 @@ nav .wrapper {
     display: flex;
     align-items: center;
     justify-content: space-between; /* preenche automaticamente os espaços, distanciando ao máximo seus elementos. Usado para posicionar elementos nas extremidades do eixo X */
+    gap: 1rem; /* espaçamento a mais no nav (logo --- menu) */
 }
 
 /* ============= estilo do nav quando a function do JS for executada e a class scroll for add no html ================*/
@@ -206,7 +221,136 @@ nav.scroll svg:nth-child(1) path {
     fill: white;
 }
 
-nav.scroll svg:nth-child(2) path {
+nav.scroll button path {
+    /* pega o segundo FIHLO (svg) que encontrar */
+    stroke: white;
+}
+
+nav button {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+/* ========== NAVIGATION ========== */
+
+/* ========== MENU-EXPANDED ========== */
+
+body.menu-expanded {
+    /* essa declaração diz: QUANDO o body tiver a class menu-expanded, faça {...} */
+
+    overflow: hidden; /* overflow - sobras da página, gerando scroll Y e X. Hidden faz com que não sobre, não haja rolagem */
+}
+
+body.menu-expanded > :not(nav) {
+    /* faz com que todos os itens de primeiro nível sumam com display none // o :not (pseudo) é a exceção, então, tudo de primeiro nível, menos o nav, vai sumir */
+
+    display: none;
+
+    /* a ideia aqui é para melhorar a acessibilidade, onde, quando o usuário der TAB, para pular entre links e buttons, seja navegável apenas os links e buttons do menu-expanded. 
+    
+    sem esse comando, o usuário, ao dar TAB, vai acabar pulando para outros links que nem está vendo e ficará confuso.
+    */
+}
+
+.menu,
+.close-menu,
+body.menu-expanded .open-menu {
+    opacity: 0; /* deixa os itens invisiveis, mas se forem links ou buttons, dá para interagir */
+    visibility: hidden; /* deixa os itens invisíveis e não dá para interagir ou receber foco*/
+
+    /* apesar de ocultar os itens, o layout ainda é afetado */
+
+    /* deixando os itens principais invisíveis ao abrir o menu */
+}
+
+body.menu-expanded .menu,
+body.menu-expanded .close-menu {
+    opacity: 1;
+    visibility: visible;
+    /* deixando os itens principais visíveis quando for fechado o menu */
+}
+
+body.menu-expanded .menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: var(--primary-color);
+
+    width: 100vw; /* pegar toda a largura da tela ---- vw - viewport width */
+    height: 100vh; /* pegar toda a altura da tela ---- vh - viewport height */
+
+    padding-top: var(--nav-height);
+}
+
+body.menu-expanded nav {
+    position: relative; /* posição relativa */
+}
+
+.menu ul:nth-child(1) {
+    /* está pegando o primeiro ul (primeiro filho first child) apenas, pois no .menu tem mais de 1 */
+    display: flex; /* modifica o posicionamento dentro da box */
+    flex-direction: column; /* altera o eixo direcional da box (aqui foi de X para Y)*/
+    gap: 4.8rem; /* espaçamento entre itens */
+
+    margin-top: 6rem;
+
+    font-weight: 700;
+    font-size: 2.4rem;
+    line-height: 3.1rem;
+}
+
+.menu ul li a {
+    color: white;
+    text-decoration: none;
+}
+
+.menu .button {
+    background: white;
+    border-radius: 4rem;
+    font-weight: 700;
+    font-size: 1.8rem;
+    line-height: 2.3rem;
+    text-transform: uppercase;
+    text-decoration: none;
+
+    color: var(--primary-color);
+
+    display: inline-block; /* inline já vem por padrão, porém, não é possível alterar margin e/ou largura dessa forma; por isso usar inline-block, pois, além de destravar mais opções, ainda quebra a linha, fazendo com que os itens sobrepostos desçam. */
+
+    /* espaçamentos  */
+
+    padding: 1.6rem 3.2rem;
+
+    margin-top: 4.8rem;
+    margin-bottom: 8rem;
+
+    /*  */
+}
+
+.social-links {
+    display: flex;
+    gap: 3.2rem;
+    align-items: center;
+    justify-content: center;
+
+    /* ajuste de botões */
+}
+
+body.menu-expanded .logo,
+body.menu-expanded button {
+    position: relative;
+    z-index: 10;
+
+    /* faz com que o menu apareça --- está colocando ele na camada mais acima do visual, com o z-index (o position relative é para desbloquear o z-index) */
+}
+
+body.menu-expanded .logo path {
+    /* pega o primeiro FILHO (svg) que encontrar */
+    fill: white;
+}
+
+body.menu-expanded button path {
     /* pega o segundo FIHLO (svg) que encontrar */
     stroke: white;
 }
