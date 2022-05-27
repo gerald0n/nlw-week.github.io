@@ -48,4 +48,5 @@ brading:
 o que é: construção de marca pessoal.
 para que serve: deixar o profissional bem posicionado e no radar.
 
-ser ativo na comunidade, github, linkedin, postar sobre assuntos, falar sobre assuntos e tecnologias,
+ser ativo na comunidade, github, linkedin, postar sobre assuntos, falar sobre assuntos e tecnologias.
+

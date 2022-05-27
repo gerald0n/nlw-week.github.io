@@ -44,7 +44,7 @@ body {
     font-family: 'DM Sans';
     text-align: center;
     font-size: 1.6rem;
-    overflow: overlay;
+    overflow: overlay; 
 }
 
 .wrapper {
