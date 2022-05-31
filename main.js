@@ -1,3 +1,6 @@
+if(scrollY > 0 )
+    nav.classList.add('scroll')
+
 function onScroll() {
     if (scrollY > 0) nav.classList.add('scroll')
     else nav.classList.remove('scroll')
@@ -15,3 +18,29 @@ function openMenu() {
 function closeMenu() {
     document.body.classList.remove('menu-expanded')
 }
+
+ScrollReveal({
+    origin: 'top',
+    distance: '30px',
+    duration: 1700
+}).reveal(`
+#home,
+#about,
+#home img`)
+
+ScrollReveal({
+    origin: 'left',
+    distance: '30px',
+    duration: 700
+}).reveal(`
+#home .stat,
+#services .header-services,
+#services .card,
+.contacts,
+.contact-address,
+.contact-email,
+.contacts button,
+.contacts img`
+)
+
+/*  */
